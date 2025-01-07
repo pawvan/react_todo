@@ -6,7 +6,7 @@ function App(){
         e.preventDefault()
 if(text.trim()){
     const newTodo  ={
-        idd:Date.now(),text
+        id:Date.now(),text
     }
     setTodo([...todo,newTodo])
 setText("");
