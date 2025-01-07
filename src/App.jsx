@@ -51,7 +51,7 @@ function App() {
                             {tod.text}
                         </span>
                         <button type="radio" onClick={() => toggleCompleted(tod.id)}>
-                            {tod.completed ? "delete " : " complete  "}
+                            {tod.completed ? "uncomplete " : " complete  "}
                         </button>
                         <button onClick={() => deleteTodo(tod.id)}>delete</button>
                     </li>
