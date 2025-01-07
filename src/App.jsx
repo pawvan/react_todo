@@ -1,62 +1,37 @@
 import { useState } from "react";
-
+import TodoForm from "./TodoForm";
+import TodoList from "./TodoList";
 function App() {
-    const [todo, setTodo] = useState([]);
-    const [text, setText] = useState("");
+    const [todos, setTodos] = useState([]);
 
-    const addTodo = (e) => {
-        e.preventDefault();
+    const addTodo = (text) => {
         if (text.trim()) {
             const newTodo = {
                 id: Date.now(),
                 text,
                 completed: false,
             };
-            setTodo([...todo, newTodo]);
-            setText("");
+            setTodos([...todos, newTodo]);
         }
     };
+
     const deleteTodo = (id) => {
-        setTodo(todo.filter((tod) => tod.id !== id));
+        setTodos(todos.filter((todo) => todo.id !== id));
     };
+
     const toggleCompleted = (id) => {
-        setTodo(
-            todo.map((tod) =>
-                tod.id === id
-                    ? { ...tod, completed: !tod.completed }
-                    : tod
+        setTodos(
+            todos.map((todo) =>
+                todo.id === id ? { ...todo, completed: !todo.completed } : todo
             )
         );
     };
 
     return (
         <>
-            <div>Todo-app</div>
-            <form onSubmit={addTodo}>
-                <input
-                    type="text"
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                />
-                <button type="submit">add</button>
-            </form>
-            <ul>
-                {todo.map((tod) => (
-                    <li key={tod.id}>
-                        <span
-                            style={{
-                                textDecoration: tod.completed ? "line-through" : "none",
-                            }}
-                        >
-                            {tod.text}
-                        </span>
-                        <button type="radio" onClick={() => toggleCompleted(tod.id)}>
-                            {tod.completed ? "uncomplete " : " complete  "}
-                        </button>
-                        <button onClick={() => deleteTodo(tod.id)}>delete</button>
-                    </li>
-                ))}
-            </ul>
+            <div>Todo App</div>
+            <TodoForm addTodo={addTodo} />
+            <TodoList todos={todos} deleteTodo={deleteTodo} toggleCompleted={toggleCompleted} />
         </>
     );
 }
