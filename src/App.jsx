@@ -50,8 +50,8 @@ function App() {
                         >
                             {tod.text}
                         </span>
-                        <button onClick={() => toggleCompleted(tod.id)}>
-                            {tod.completed ? "delete the todo" : " complete the todoo"}
+                        <button type="radio" onClick={() => toggleCompleted(tod.id)}>
+                            {tod.completed ? "delete " : " complete  "}
                         </button>
                         <button onClick={() => deleteTodo(tod.id)}>delete</button>
                     </li>
